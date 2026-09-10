@@ -557,9 +557,6 @@ If P_window > 0:
         <p>Enforces automated eligibility filtering based on CGPA thresholds, prevents duplicate applications, validates submission deadlines, and executes cascade deletion rules via Spring Data JPA and MySQL transactions.</p>
 
         <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <a href="https://chakradharreddy1606137.github.io/Student_Placement_Management/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary glow-btn">
-            Launch Live Application ➔
-          </a>
           <a href="https://github.com/chakradharreddy1606137/Student_Placement_Management" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
             GitHub Repository
           </a>
