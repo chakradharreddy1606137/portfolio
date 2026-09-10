@@ -700,9 +700,10 @@ function initCopyButtons() {
    -------------------------------------------------------------------------- */
 function initContactForm() {
   const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('send-message-btn');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = document.getElementById('contact-name').value.trim();
@@ -715,14 +716,48 @@ function initContactForm() {
       return;
     }
 
-    const mailtoLink = `mailto:kcr1606137@gmail.com?subject=${encodeURIComponent(subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+    const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Sending Message...</span>';
+    }
 
-    showToast('Opening email client to send message...');
-    
-    setTimeout(() => {
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/kcr1606137@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `New Portfolio Message from ${name}: ${subject}`,
+          name: name,
+          email: email,
+          subject: subject,
+          message: message,
+          _template: 'table'
+        })
+      });
+
+      const result = await response.json();
+      if (response.ok && result.success !== 'false') {
+        showToast('✅ Message sent! It has been delivered to Chakradhar\'s Gmail inbox.');
+        form.reset();
+      } else {
+        throw new Error('Endpoint error');
+      }
+    } catch (err) {
+      // Graceful fallback to mailto if offline or blocked
+      const mailtoLink = `mailto:kcr1606137@gmail.com?subject=${encodeURIComponent(subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+      showToast('Opening your email client to complete sending...');
       window.location.href = mailtoLink;
       form.reset();
-    }, 600);
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHTML;
+      }
+    }
   });
 }
 
