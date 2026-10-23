@@ -153,7 +153,9 @@ function initTypewriter() {
 
   const roles = [
     'Multi-Agent AI Systems',
+    'Automated SDET Test Frameworks',
     'Zero-Poison NDN Defenses',
+    'CDN & Edge Cloud Protocols',
     'Enterprise Network Automation',
     'Full-Stack Spring & React Apps',
     'Distributed Systems'
@@ -632,8 +634,8 @@ function initProjectFilters() {
       const filterValue = btn.getAttribute('data-filter');
 
       projectCards.forEach(card => {
-        const cardCategory = card.getAttribute('data-category');
-        if (filterValue === 'all' || cardCategory === filterValue) {
+        const cardCategory = card.getAttribute('data-category') || '';
+        if (filterValue === 'all' || cardCategory.split(' ').includes(filterValue)) {
           card.style.display = 'flex';
           card.style.animation = 'fade-in 0.4s ease forwards';
         } else {
