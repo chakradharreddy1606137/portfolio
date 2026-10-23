@@ -572,6 +572,25 @@ If P_window > 0:
         <h4>2. Real-Time What-If Recalculations</h4>
         <p>Allows commercial leaders to simulate territory realignment, commission rate adjustments, and pipeline forecasts with low-latency multi-dimensional recalculations.</p>
       `
+    },
+    'edgeprobe': {
+      title: 'EdgeProbe: Automated CDN, DNS & Distributed Telemetry QA Framework',
+      html: `
+        <h4>1. RFC 9111 HTTP Caching & Edge Protocol Validation</h4>
+        <p>Built automated test suites asserting edge caching behavior, including X-Cache HIT vs MISS transitions, TTL expiration, conditional 304 Not Modified revalidation with ETags, and Fast Purge cache invalidation.</p>
+
+        <h4>2. High-Precision DNS Anycast SLA Benchmarking</h4>
+        <p>Engineered multi-resolver DNS probers querying Google (8.8.8.8) and Cloudflare (1.1.1.1) with <code>dnspython</code>, measuring nanosecond-precision RTT using <code>time.perf_counter()</code> against strict latency SLAs.</p>
+
+        <h4>3. Analytical Data Warehouse SQL Quality Gates</h4>
+        <p>Automated SQL assertions with SQLAlchemy to verify streaming telemetry ingestion into fact tables: detecting ETL retry duplicates via <code>HAVING COUNT(*) > 1</code>, enforcing zero nulls in non-nullable dimensions, and detecting schema drift.</p>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://github.com/chakradharreddy1606137/EdgeProbe" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+            GitHub Repository
+          </a>
+        </div>
+      `
     }
   };
 
